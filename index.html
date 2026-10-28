@@ -22,26 +22,21 @@
           <a class="navbar-brand brand" href="#top"
             >STERLING <span>FASHIONS</span></a
           >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#nav"
-            aria-label="Toggle menu"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-              <li class="nav-item" v-for="l in links" :key="l.id">
-                <a class="nav-link" :href="'#' + l.id">{{ l.label }}</a>
-              </li>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item" v-for="l in links" :key="l.id">
+              <a class="nav-link" :href="'#' + l.id">{{ l.label }}</a>
+            </li>
 
-              <li class="nav-item ms-lg-2">
-                <a class="btn btn-sf btn-sm" href="#contact">Contact us</a>
-              </li>
-            </ul>
-          </div>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-sf btn-sm" href="#contact">Contact us</a>
+            </li>
+          </ul>
+        </div>
         </div>
       </nav>
 
