@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sterling Fashions – A Reliable Sourcing House</title>
+    <meta
+      name="description"
+      content="Sterling Fashions is an apparel buying and sourcing house connecting global brands with trusted garment manufacturers."
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-ink sticky-top">
+        <div class="container">
+          <a class="navbar-brand brand" href="#top"
+            >STERLING <span>FASHIONS</span></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#nav"
+            aria-label="Toggle menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+              <li class="nav-item" v-for="l in links" :key="l.id">
+                <a class="nav-link" :href="'#' + l.id">{{ l.label }}</a>
+              </li>
+
+              <li class="nav-item ms-lg-2">
+                <a class="btn btn-sf btn-sm" href="#contact">Contact us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <main id="top">
+        <header
+          class="hero px-3"
+          id="Home"
+          :style="{ backgroundImage: 'url(' + images.hero + ')' }"
+        >
+          <div class="containent position-relative">
+            <p class="tagline">{{ company.tagline }}</p>
+
+            <h1>A reliable<br />sourcing house</h1>
+
+            <p class="lead col-lg-6">{{ company.intro }}</p>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a href="#contact" class="btn btn-sf btn-lg">
+                Start a sourcing enquiry
+              </a>
+
+              <a href="#products" class="btn btn-outline-light btn-lg">
+                See what we make
+              </a>
+            </div>
+
+            <div class="row g-0 stats mt-5">
+              <div class="col-6 col-md-3" v-for="s in stats" :key="s.label">
+                <div class="stat">
+                  <strong>{{ s.value }}</strong>
+                  <span>{{ s.label }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- PRODUCTS -->
+
+        <section id="products" class="py-section px-3">
+          <div class="products-heading">
+            <div class="row g-4">
+              <div class="col-12 text-center">
+                <span class="section-eyebrow">OUR PRODUCTS</span>
+                <h2>Explore Our Product Categories</h2>
+                <p>
+                  We offer a wide range of apparel products, including jackets,
+                  knitwear, and more. Each category is crafted with precision
+                  and care to meet the highest standards of quality.
+                </p>
+              </div>
+            <div
+              class="col-md-4"
+              v-for="product in products"
+              :key="product.name"
+            >
+              <div class="product h-100 shadow-sm overflow-hidden">
+                <!-- Product Image -->
+                <img
+                  :src="product.image"
+                  :alt="product.name"
+                  class="product-img"
+                  loading="lazy"
+                />
+
+                <div class="product-content p-4">
+                  <h3>{{ product.name }}</h3>
+
+                  <p>
+                    <strong>Capacity:</strong>
+                    {{ product.capacity }}
+                  </p>
+
+                  <ul>
+                    <li v-for="item in product.items" :key="item">
+                      {{ item }}
+                    </li>
+                  </ul>
+
+                  <button
+                    class="btn btn-primary mt-2"
+                    src="Jackets.html"
+                    @click="showDetails(Jackets)"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- COLLECTIONS -->
+        <section id="collections" class="py-section px-3">
+          <div>
+            <h2 class="d-flex justify-content-center">Our Collections</h2>
+
+            <div class="d-flex flex-wrap gap-2 mb-4 justify-content-center">
+              <button
+                v-for="(collection, i) in collections"
+                :key="collection.name"
+                class="btn btn-sf"
+                @click="pick(i)"
+              >
+                {{ collection.name }}
+              </button>
+            </div>
+
+            <div class="collection-view" :style="currentBg">
+              <div class="collection-text">
+                <h3>{{ current.name }}</h3>
+                <p>{{ current.text }}</p>
+              </div>
+
+              <button
+                class="arrow left"
+                @click="prev"
+                aria-label="Previous photo"
+              >
+                &#8249;
+              </button>
+
+              <button class="arrow right" @click="next" aria-label="Next photo">
+                &#8250;
+              </button>
+            </div>
+
+            <div class="thumbs mt-3">
+              <img
+                v-for="(src, i) in current.gallery"
+                :key="src"
+                :src="src"
+                :alt="current.name + ' photo ' + (i + 1)"
+                :class="{ on: photo === i }"
+                @click="photo = i"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ALL PRODUCTS GALLERY -->
+        <section id="productes" class="all-products-section py-section px-3">
+          <div>
+            <div class="products-heading text-center">
+              <span class="section-eyebrow">STERLING FASHIONS</span>
+              <h2>Explore Our Products</h2>
+              <p>
+                Quality apparel solutions for global brands, retailers and
+                businesses.
+              </p>
+            </div>
+            <!-- Category Filters -->
+            <div
+              class="product-filters d-flex flex-wrap justify-content-center gap-2"
+            >
+              <button
+                v-for="category in galleryCategories"
+                :key="category"
+                type="button"
+                class="filter-btn"
+                :class="{ active: activeGalleryCategory === category }"
+                @click="setGalleryCategory(category)"
+              >
+                {{ category === 'All' ? 'All Products' : category }}
+              </button>
+            </div>
+
+            <!-- Product Image Grid -->
+            <div class="row g-4">
+              <div
+                class="col-6 col-md-4 col-lg-3"
+                v-for="product in filteredGallery"
+                :key="product.name + product.img"
+              >
+                <article class="gallery-product-card h-100">
+                  <div class="gallery-product-image">
+                    <img
+                      :src="product.img"
+                      :alt="product.name"
+                      loading="lazy"
+                    />
+
+                    <span class="product-category-label">
+                      {{ product.category }}
+                    </span>
+
+                    <a
+                      class="product-view-link"
+                      href="#denim"
+                      @click="showDetails(product)"
+                    >
+                      Enquire Now ↗
+                    </a>
+                  </div>
+
+                  <div class="gallery-product-info">
+                    <p class="product-category-name">{{ product.category }}</p>
+
+                    <h3>{{ product.name }}</h3>
+
+                    <p class="product-description">{{ product.description }}</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- No Products Found -->
+              <div
+                v-if="filteredGallery.length === 0"
+                class="col-12 text-center"
+              >
+                <p>No products found in this category.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="py-section px-3">
+          <div>
+            <h2>Buying and sourcing, made simple</h2>
+            <p class="text-muted col-lg-8">{{ company.about }}</p>
+            <div class="row g-4 mt-1">
+              <div class="col-md-6" v-for="c in mission" :key="c.title">
+                <div class="card-sf h-100">
+                  <h3>{{ c.title }}</h3>
+                  <p>{{ c.text }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="band py-section px-3">
+          <div>
+            <h2>What we do</h2>
+            <div class="row g-4 mt-1">
+              <div class="col-md-4" v-for="s in services" :key="s.title">
+                <div class="band-card h-100">
+                  <h3>{{ s.title }}</h3>
+                  <p>{{ s.text }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- COMPLIANCE
+      <section id="compliance" class="compliance-section py-5">
+  <div class="container-fluid px-3 px-lg-4">
+
+   
+    <div class="row align-items-center g-4 mb-4 mb-lg-5">
+
+      <!-- LEFT CONTENT -->
+        <section id="compliance" class="compliance-section py-5">
+          <div class="container-fluid px-3 px-lg-4">
+            <!-- TOP SECTION -->
+            <div class="row align-items-center g-4 mb-4 mb-lg-5">
+              <!-- LEFT CONTENT -->
+              <div class="col-lg-6">
+                <span class="eyebrow">OUR COMMITMENT</span>
+
+                <h1 class="main-title">Compliance and Certifications</h1>
+
+                <p class="description mb-0">
+                  We strictly follow government regulations and international
+                  standards to ensure high quality, safety and transparency in
+                  our import and export operations. Our registration and
+                  certifications reflect our commitment to serving our customers
+                  with trust and integrity.
+                </p>
+              </div>
+
+              <!-- TOP CERTIFICATE CARDS -->
+              <div class="col-lg-6">
+                <div class="row g-3">
+                  <div class="col-6 col-md-3">
+                    <div class="mini-card">
+                      <div class="bangladesh-seal">🇧🇩</div>
+                      <h3>Government of Bangladesh</h3>
+                      <p>
+                        Office of the Chief Controller of Imports and Exports
+                        (ERC)
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3">
+                    <div class="mini-card">
+                      <h3>ERC No:</h3>
+                      <div class="erc-number">26032611150226</div>
+                      <p>Export Registration Certificate</p>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3">
+                    <div class="mini-card">
+                      <div class="round-seal">✦</div>
+                      <h3>National Board of Revenue</h3>
+                      <strong class="nbr-text">NBR</strong>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3">
+                    <div class="mini-card">
+                      <div class="export-symbol">↗</div>
+                      <h3>Bangladesh Export Promotion Bureau</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTTOM SECTION -->
+            <div>
+              <!-- LARGE CERTIFICATE IMAGE -->
+             
+                <div class="certificate-frame">
+                    <img
+                      src="image/certificate.png"
+                      class="main-certificate"
+                    />
+                  </a>
+                    <img 
+                      src="image/certificate-1.png"
+                      class="main-certificate"
+                    />
+                  </a>
+                    <img
+                      src="image/certificate-2.png"
+                      class="main-certificate"
+                    />
+                  </a>
+                    <img
+                      src="image/certificate-3.png"
+                      class="main-certificate"
+                    />
+                  </a>
+                </div>
+              
+            </div>
+          </div>
+        </section>
+
+        <!-- OFFER -->
+        <section id="offer" class="py-section px-3">
+          <div>
+            <h2>What we offer</h2>
+            <ul class="check offer-list">
+              <li v-for="o in offers" :key="o">{{ o }}</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact py-section px-3">
+          <div class="container">
+            <div class="row g-5">
+              <div class="col-lg-5">
+                <h2>Let's source your next collection</h2>
+                <p>
+                  Tell us your product, quantity and target market. We reply
+                  with a sourcing plan.
+                </p>
+                <dl class="row">
+                  <template v-for="c in contacts" :key="c.label">
+                    <dt class="col-sm-4">{{ c.label }}</dt>
+                    <dd class="col-sm-8">{{ c.value }}</dd>
+                  </template>
+                </dl>
+              </div>
+              <div class="col-lg-7">
+                <form
+                  class="bg-white text-dark p-4"
+                  @submit.prevent="send"
+                  novalidate
+                >
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label" for="name">Name</label>
+                      <input
+                        id="name"
+                        class="form-control"
+                        v-model.trim="form.name"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="email">Email</label>
+                      <input
+                        id="email"
+                        type="email"
+                        class="form-control"
+                        v-model.trim="form.email"
+                        required
+                      />
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="product"
+                        >Product category</label
+                      >
+                      <select
+                        id="product"
+                        class="form-select"
+                        v-model="form.product"
+                      >
+                        <option v-for="p in products" :key="p.name">
+                          {{ p.name }}
+                        </option>
+                        <option v-for="c in collections" :key="c.name">
+                          {{ c.name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="msg"
+                        >Quantity and details</label
+                      >
+                      <textarea
+                        id="msg"
+                        rows="4"
+                        class="form-control"
+                        v-model.trim="form.message"
+                      ></textarea>
+                    </div>
+                    <div class="col-12">
+                      <p v-if="error" class="text-danger small mb-2">
+                        {{ error }}
+                      </p>
+                      <button class="btn btn-sf" type="submit">
+                        Send enquiry by email
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="bg-ink text-light-muted py-4 small">
+        <div class="d-flex flex-wrap justify-content-between gap-2">
+          <span
+            >&copy; {{ year }} Sterling Fashions. Innovation meets
+            elegance.</span
+          >
+          <a href="#top" class="text-light-muted">Back to top</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.38/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.4.5/dist/vue-router.global.prod.js"></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
