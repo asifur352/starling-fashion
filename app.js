@@ -84,9 +84,9 @@ createApp({
           ],
         },
          {
-          name: "Denim Collection",
+          name: "Premium Outerwea",
           capacity: "Multiple styles",
-          image: "image/Denim/Denim(4).jpg",
+          image: "image/Outerwear/Outerwear(1).jpg",
           items: [
             "Premium denim fabric",
             "Modern washes and fits",
@@ -98,9 +98,6 @@ createApp({
 
       galleryCategories: [
         "All",
-        "Workwear",
-        "Uniforms",
-        "Fashionwear",
         "Sweaters",
         "Knitwear",
         "Denim",
@@ -110,24 +107,7 @@ createApp({
       activeGalleryCategory: "All",
 
       galleryProducts: [
-        {
-          name: "Industrial Workwear",
-          category: "Workwear",
-          img: "image/Sweaters/Sweaters(3).jpg",
-          description: "Durable professional workwear.",
-        },
-        {
-          name: "Corporate Uniforms",
-          category: "Uniforms",
-          img: "image/Sweaters/Sweaters(3).jpg",
-          description: "Smart uniforms for professional teams.",
-        },
-        {
-          name: "Fashionwear",
-          category: "Fashionwear",
-          img: "image/Sweaters/Sweaters(3).jpg",
-          description: "Contemporary apparel for global brands.",
-        },
+       
         {
           name: "Premium Sweaters",
           category: "Sweaters",
@@ -135,53 +115,126 @@ createApp({
           description: "Comfortable sweaters in modern styles.",
         },
         {
+          name: "Premium Sweaters",
+          category: "Sweaters",
+          img: "image/Sweaters/Sweaters(2).jpg",
+          description: "Comfortable sweaters in modern styles.",
+        },
+        {
+          name: "Premium Sweaters",
+          category: "Sweaters",
+          img: "image/Sweaters/Sweaters(3).jpg",
+          description: "Comfortable sweaters in modern styles.",
+        },
+        {
+          name: "Premium Sweaters",
+          category: "Sweaters",
+          img: "image/Sweaters/Sweaters(4).jpg",
+          description: "Comfortable sweaters in modern styles.",
+        },
+        {
+          name: "Premium Sweaters",
+          category: "Sweaters",
+          img: "image/Sweaters/Sweaters(5).jpg",
+          description: "Comfortable sweaters in modern styles.",
+        },
+        {
+          name: "Premium Sweaters",
+          category: "Sweaters",
+          img: "image/Sweaters/Sweaters(6).jpg",
+          description: "Comfortable sweaters in modern styles.",
+        },
+        {
           name: "Essential Knitwear",
           category: "Knitwear",
-          img: "image/Sweaters/Sweaters(2).jpg",
+          img: "image/Knitwear/Knitwear.jpg",
+          description: "Versatile knit garments.",
+        },
+        {
+          name: "Essential Knitwear",
+          category: "Knitwear",
+          img: "image/Knitwear/Knitwear(2).jpg",
+          description: "Versatile knit garments.",
+        },
+        {
+          name: "Essential Knitwear",
+          category: "Knitwear",
+          img: "image/Knitwear/Knitwear(3).jpg",
+          description: "Versatile knit garments.",
+        },
+        {
+          name: "Essential Knitwear",
+          category: "Knitwear",
+          img: "image/Knitwear/Knitwear.jpg",
           description: "Versatile knit garments.",
         },
         {
           name: "Denim Collection",
           category: "Denim",
-          img: "image/Sweaters/Sweaters(3).jpg",
+          img: "image/Denim/Denim(1).jpg",
+          description: "Everyday denim for modern collections.",
+        },
+        {
+          name: "Denim Collection",
+          category: "Denim",
+          img: "image/Denim/Denim(2).jpg",
+          description: "Everyday denim for modern collections.",
+        },
+        {
+          name: "Denim Collection",
+          category: "Denim",
+          img: "image/Denim/Denim(3).jpg",
+          description: "Everyday denim for modern collections.",
+        },
+        {
+          name: "Denim Collection",
+          category: "Denim",
+          img: "image/Denim/Denim(4).jpg",
+          description: "Everyday denim for modern collections.",
+        },
+        {
+          name: "Denim Collection",
+          category: "Denim",
+          img: "image/Denim/Denim(5).jpg",
+          description: "Everyday denim for modern collections.",
+        },
+        {
+          name: "Denim Collection",
+          category: "Denim",
+          img: "image/Denim/Denim(6).jpg",
           description: "Everyday denim for modern collections.",
         },
         {
           name: "Premium Outerwear",
           category: "Outerwear",
-          img: "image/Sweaters/Sweaters(3).jpg",
+          img: "image/Outerwear/Outerwear(1).jpg",
           description: "Jackets and coats for seasonal ranges.",
         },
         {
           name: "Premium Outerwear",
           category: "Outerwear",
-          img: "image/Sweaters/Sweaters(3).jpg",
+          img: "image/Outerwear/Outerwear(2).jpg",
           description: "Jackets and coats for seasonal ranges.",
         },
         {
           name: "Premium Outerwear",
           category: "Outerwear",
-          img: "image/Sweaters/Sweaters(6).jpg",
+          img: "image/Outerwear/Outerwear(3).jpg",
           description: "Jackets and coats for seasonal ranges.",
         },
         {
           name: "Premium Outerwear",
           category: "Outerwear",
-          img: "image/Knitwear/Knitwear(3).jpg",
-          description: "Jackets and coats for seasonal ranges.",
-        },
-        {
-          name: "Premium Outerwear",
-          category: "Denim",
-          img: "image/Denim/Denim(4).jpg",
+          img: "image/Outerwear/Outerwear(4).jpg",
           description: "Jackets and coats for seasonal ranges.",
         },
         {
           name: "Premium Outerwear",
           category: "Outerwear",
-          img: "image/Knitwear/Knitwear(2).jpg",
+          img: "image/Outerwear/Outerwear(5).jpg",
           description: "Jackets and coats for seasonal ranges.",
         },
+    
       ],
 
       // Set img to a file path (e.g. 'images/sweaters.jpg') to show your own photo.
