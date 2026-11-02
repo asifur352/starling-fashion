@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <title>Mens Polo Shirt - SaRa</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #222;
+      }
+
+      .product-page {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .breadcrumb {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        margin-bottom: 30px;
+        color: #777;
+        flex-wrap: wrap;
+      }
+
+      .breadcrumb a {
+        text-decoration: none;
+        color: #555;
+      }
+
+      .product-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      /* Image Gallery */
+
+      /* .gallery {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+      } */
+
+      .thumbnail-list {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding-top: 20px;
+      }
+
+      .thumbnail-list img {
+        width: 75px;
+        height: 85px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .thumbnail-list img.active {
+        border: 2px solid #222;
+      }
+
+      .image-zoom-wrapper {
+        display: flex;
+        gap: 20px;
+        position: relative;
+        align-items: flex-start;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        cursor: crosshair;
+        background: #fff;
+      }
+
+      .main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      #zoomResult {
+        display: none;
+        position: absolute;
+        left: calc(100% + 15px);
+        top: 0;
+        width: 450px;
+        height: 450px;
+        border: 1px solid #ddd;
+        background-color: white;
+        background-repeat: no-repeat;
+        z-index: 100;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      @media (max-width: 900px) {
+        #zoomResult {
+          display: none !important;
+        }
+      }
+
+      .discount-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #d92332;
+        color: white;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      /* Product Information */
+
+      .product-info h1 {
+        font-size: 25px;
+        margin: 5px 0;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        color: #777;
+      }
+
+      .rating span {
+        color: #f5a623;
+      }
+
+      .rating small {
+        color: #777;
+        margin-left: 8px;
+      }
+
+      .price-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 2px 0;
+        flex-wrap: wrap;
+      }
+
+      .price-section h2 {
+        color: #d92332;
+        font-size: 30px;
+        margin: 0;
+      }
+
+      .price-section del {
+        color: #999;
+      }
+
+      .price-section span {
+        color: #d92332;
+        font-size: 14px;
+      }
+
+      .delivery {
+        background: #fff5e8;
+        padding: 12px;
+        color: #a55c00;
+        font-size: 14px;
+        margin: 2px 0 !important;
+      }
+
+      .sku,
+      .seller,
+      .category {
+        color: #666;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+
+      .option-section {
+        margin: 25px 0;
+      }
+
+      .option-section h3,
+      .quantity-section h3 {
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      /* Color */
+
+      .color-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: white;
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .color-option span {
+        width: 25px;
+        height: 25px;
+        background: repeating-linear-gradient(
+          45deg,
+          red 0 10px,
+          black 10px 20px
+        );
+      }
+
+      .color-option.selected {
+        border: 2px solid #222;
+      }
+
+      /* Size */
+
+      .size-heading {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .size-heading a {
+        color: #222;
+        font-size: 14px;
+      }
+
+      .size-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .size-buttons button {
+        width: 48px;
+        height: 43px;
+        border: 1px solid #ccc;
+        background: white;
+        cursor: pointer;
+      }
+
+      .size-buttons button.active {
+        background: #222;
+        color: white;
+      }
+
+      .stock {
+        color: #238b45;
+        font-size: 14px;
+      }
+
+      /* Quantity */
+
+      .quantity-section {
+        margin: 20px 0;
+      }
+
+      .quantity-box {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        width: fit-content;
+      }
+
+      .quantity-box button {
+        border: none;
+        background: #f3f3f3;
+        padding: 10px 17px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .quantity-box span {
+        padding: 0 20px;
+      }
+
+      /* Buttons */
+
+      .action-buttons {
+        display: flex;
+        gap: 12px;
+        margin: 25px 0;
+      }
+
+      .action-buttons button {
+        flex: 1;
+        padding: 15px 10px;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        color: white;
+      }
+
+      .cart-btn {
+        background: #222;
+      }
+
+      .buy-btn {
+        background: #d92332;
+      }
+
+      .action-buttons button:hover {
+        opacity: 0.85;
+      }
+
+      .share {
+        margin-top: 20px;
+        color: #666;
+      }
+
+      /* Size Chart */
+
+      .size-chart,
+      .shop-benefits {
+        margin-top: 65px;
+      }
+
+      .size-chart h2,
+      .shop-benefits h2 {
+        font-size: 23px;
+        margin-bottom: 25px;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 14px;
+      }
+
+      th {
+        background: #222;
+        color: white;
+      }
+
+      /* Benefits */
+
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .benefit {
+        text-align: center;
+        padding: 25px 15px;
+        background: #f7f7f7;
+      }
+
+      .benefit div {
+        font-size: 35px;
+      }
+
+      .benefit h3 {
+        font-size: 16px;
+      }
+
+      .benefit p {
+        color: #777;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      #colorOptions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      /* Responsive */
+
+      @media (max-width: 768px) {
+        .product-container {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .main-image img {
+          max-height: 480px;
+        }
+
+        .benefit-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .product-info h1 {
+          font-size: 21px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-page {
+          padding: 12px;
+        }
+
+        .gallery {
+          flex-direction: column-reverse;
+        }
+
+        .thumbnail-list {
+          flex-direction: row;
+          overflow-x: auto;
+          width: 100%;
+        }
+
+        .thumbnail-list img {
+          min-width: 65px;
+          height: 70px;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .benefit-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+      }
+
+      /* Footer */
+      .starling-footer {
+        width: 100%;
+        padding: 25px 23px 0;
+        font-family: Arial, sans-serif;
+        color: #111;
+        background: #fff;
+        box-sizing: border-box;
+      }
+
+      .footer-container {
+        display: grid;
+        grid-template-columns: 2.2fr 0.85fr 0.85fr 1.25fr 1.15fr;
+        gap: 35px;
+        padding-bottom: 35px;
+      }
+
+      .footer-column h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 16px;
+        color: #111;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 11px;
+      }
+
+      .footer-column a {
+        text-decoration: none;
+        color: #555;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .footer-column a:hover {
+        color: #e91e36;
+      }
+
+      /* Contact */
+      .contact-column p {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+        margin: 0 0 10px;
+      }
+
+      .contact-column p i {
+        background: #888;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        margin-top: 1px;
+      }
+
+      .contact-number {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.7;
+      }
+
+      /* Social Icons */
+      .social-icons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 23px;
+      }
+
+      .social-icons a {
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 13px;
+      }
+
+      .social-icons a:hover {
+        transform: translateY(-3px);
+        color: white;
+      }
+
+      .facebook {
+        background: #1877f2;
+      }
+
+      .linkedin {
+        background: #0a84b8;
+      }
+
+      .youtube {
+        background: #ff0000;
+      }
+
+      .instagram {
+        background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf);
+      }
+
+      .tiktok,
+      .x-twitter {
+        background: #000;
+      }
+
+      .social-column .social-heading {
+        margin-top: 2px;
+      }
+
+      .social-column .download-heading {
+        margin: -8px 0 12px;
+      }
+
+      .app-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .app-buttons img {
+        width: 120px;
+        height: 36px;
+        object-fit: contain;
+      }
+
+      /* Copyright */
+      .footer-bottom {
+        border-top: 1px solid #ddd;
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+      }
+
+      /* Tablet */
+      @media (max-width: 992px) {
+        .footer-container {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 600px) {
+        .sara-footer {
+          padding: 25px 18px 0;
+        }
+
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px 18px;
+        }
+
+        .contact-column,
+        .social-column {
+          grid-column: 1 / -1;
+        }
+
+        .footer-bottom {
+          font-size: 12px;
+          line-height: 1.6;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-column,
+        .social-column {
+          grid-column: auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="product-page">
+      <!-- Breadcrumb -->
+
+      <div class="breadcrumb">
+        <a href="index.html">HOME</a>
+        <span>/</span>
+        <a href="product-details.html">PRODUCT DETAILS</a>
+      </div>
+
+      <!-- Product Section -->
+
+      <div class="product-container">
+        <!-- Product Images -->
+
+        <div class="gallery">
+          <div class="image-zoom-wrapper">
+            <div class="main-image" id="zoomContainer">
+              <img
+                id="mainProductImage"
+                src="image/Outerwear/Outerwear(2).jpg"
+                alt="Mens Polo Shirt"
+              />
+
+              <span class="discount-badge">50% OFF</span>
+            </div>
+
+            <div id="zoomResult"></div>
+          </div>
+          <div class="thumbnail-list" id="productThumbnails"></div>
+        </div>
+
+        <!-- Product Information -->
+
+        <div class="product-info">
+          <h1 id="productName">Mens Sweaters</h1>
+
+          <div class="rating">
+            <span>★★★★★</span>
+            <small>(0 Rating)</small>
+          </div>
+
+          <div class="price-section">
+            <h2 id="productPrice">৳608</h2>
+            <del id="productOldPrice">৳1215</del>
+            <span id="productSavings">Save ৳607</span>
+          </div>
+
+          <p class="delivery">
+            Discounted orders take 7-10 working days to deliver.
+          </p>
+
+          <p class="sku" id="productSku">SKU/Style: MPO705FKB</p>
+          <p class="seller">Sold by: Starling fashion Lifestyle Ltd.</p>
+          <p class="category" id="productCategory">Category: Mens</p>
+
+          <hr />
+
+          <!-- Color -->
+          <div class="option-section">
+            <h3>Color: <span id="selectedColor"></span></h3>
+
+            <div id="colorOptions"></div>
+          </div>
+
+          <!-- Size -->
+          <div class="option-section">
+            <div class="size-heading">
+              <h3>Size: <span id="selectedSize"></span></h3>
+              <a href="#size-chart">Size Chart</a>
+            </div>
+
+            <div class="size-buttons" id="sizeButtons"></div>
+          </div>
+
+          <p class="stock">In Stock: 38</p>
+
+          <!-- Quantity -->
+
+          <div class="quantity-section">
+            <h3>Quantity:</h3>
+
+            <div class="quantity-box">
+              <button onclick="decreaseQuantity()">−</button>
+
+              <span id="quantity">1</span>
+
+              <button onclick="increaseQuantity()">+</button>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+
+          <div class="action-buttons">
+            <button class="cart-btn">ADD TO CART</button>
+
+            <button class="buy-btn">BUY NOW</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size Chart -->
+
+      <section class="size-chart" id="size-chart">
+        <h2>Size Chart</h2>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest</th>
+                <th>Length</th>
+                <th>Shoulder</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>S</td>
+                <td>36</td>
+                <td>26</td>
+                <td>16</td>
+              </tr>
+
+              <tr>
+                <td>M</td>
+                <td>38</td>
+                <td>27</td>
+                <td>17</td>
+              </tr>
+
+              <tr>
+                <td>L</td>
+                <td>40</td>
+                <td>28</td>
+                <td>18</td>
+              </tr>
+
+              <tr>
+                <td>XL</td>
+                <td>42</td>
+                <td>29</td>
+                <td>19</td>
+              </tr>
+
+              <tr>
+                <td>XXL</td>
+                <td>44</td>
+                <td>30</td>
+                <td>20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Why Shop With Us -->
+
+      <section class="shop-benefits">
+        <h2>Why Shop With Us</h2>
+
+        <div class="benefit-grid">
+          <div class="benefit">
+            <div>🚚</div>
+            <h3>Free Shipping</h3>
+            <p>Free shipping inside Dhaka city for SaRa products.</p>
+          </div>
+
+          <div class="benefit">
+            <div>📦</div>
+            <h3>Home Delivery</h3>
+            <p>Home delivery all over Bangladesh.</p>
+          </div>
+
+          <div class="benefit">
+            <div>💳</div>
+            <h3>Easy Payment</h3>
+            <p>Various payment methods available.</p>
+          </div>
+
+          <div class="benefit">
+            <div>🔄</div>
+            <h3>Replacement Policy</h3>
+            <p>15 days replacement policy.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="starling-footer">
+      <div class="footer-container">
+        <!-- Contact Us -->
+        <div class="footer-column contact-column">
+          <h3>Contact Us</h3>
+
+          <p>
+            <i class="fa-solid fa-location-dot"></i>
+            <span
+              >Level 02, House 52, Road 12, Sector 10, Uttara, <br />
+              Dhaka 1230, Bangladesh</span
+            >
+          </p>
+
+          <p>
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:+880 1915 569233">+880 1915 569233</a>
+          </p>
+
+          <p>
+            <i class="fa-solid fa-envelope"></i>
+            <a href="info@sterlingfashions.com"> info@sterlingfashions.com </a>
+          </p>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">Media</a></li>
+            <li><a href="#">Outlets</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer -->
+        <div class="footer-column">
+          <h3>Customer</h3>
+          <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Brands</a></li>
+            <li><a href="#">Best Deals</a></li>
+            <li><a href="#">Marketplace</a></li>
+          </ul>
+        </div>
+
+        <!-- Help -->
+        <div class="footer-column">
+          <h3>Help</h3>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookies Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Replacement Policy</a></li>
+            <li><a href="#">EMI Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div class="footer-column social-column">
+          <h3>Social Media for Sterling Fashions</h3>
+
+          <div class="social-icons">
+            <a href="#" class="facebook"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="linkedin"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="youtube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="instagram"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#" class="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="x-twitter"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+          </div>
+          <h3 class="download-heading">Download App</h3>
+
+          <div class="app-buttons">
+            <a href="#">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                alt="Get it on Google Play"
+              />
+            </a>
+
+            <a href="#">
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+    </footer>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- JavaScript -->
+
+    <script>
+      /* GET SELECTED PRODUCT */
+
+      const selectedProduct = JSON.parse(
+        sessionStorage.getItem("selectedProduct") || "null",
+      );
+
+      let selectedSize = "";
+      let selectedColor = "";
+      let quantity = 1;
+
+      if (!selectedProduct) {
+        alert("Please select a product first!");
+      } else {
+        const product = selectedProduct;
+
+        // Product Name
+        document.getElementById("productName").innerText = product.name;
+
+        // Product Price
+        document.getElementById("productPrice").innerText =
+          "৳" + product.price.toLocaleString("en-US");
+
+        // Old Price
+        const oldPrice = document.getElementById("productOldPrice");
+        const savings = document.getElementById("productSavings");
+
+        if (product.old) {
+          oldPrice.innerText = "৳" + product.old.toLocaleString("en-US");
+
+          savings.innerText =
+            "Save ৳" + (product.old - product.price).toLocaleString("en-US");
+        } else {
+          oldPrice.style.display = "none";
+          savings.style.display = "none";
+        }
+
+        // Product Category
+        document.getElementById("productCategory").innerText =
+          "Category: " + product.sub;
+
+        // Main Image
+        const mainImage = document.getElementById("mainProductImage");
+
+        mainImage.src = product.images[0];
+        mainImage.alt = product.name;
+
+        // Product Thumbnails
+        const thumbnailList = document.getElementById("productThumbnails");
+
+        thumbnailList.innerHTML = "";
+
+        product.images.forEach((image, index) => {
+          const img = document.createElement("img");
+
+          img.src = image;
+          img.alt = product.name;
+          img.className = index === 0 ? "active" : "";
+
+          img.onclick = function () {
+            changeImage(this);
+          };
+
+          thumbnailList.appendChild(img);
+        });
+
+        // Product Colors
+        const colorOptions = document.getElementById("colorOptions");
+
+        colorOptions.innerHTML = "";
+
+        product.colors.forEach((color, index) => {
+          const button = document.createElement("button");
+
+          button.className = "color-option" + (index === 0 ? " selected" : "");
+
+          button.innerHTML = `
+            <span style="background:${color.hex}"></span>
+            ${color.name}
+        `;
+
+          button.onclick = function () {
+            selectColor(this, color.name);
+          };
+
+          colorOptions.appendChild(button);
+
+          if (index === 0) {
+            selectedColor = color.name;
+          }
+        });
+
+        document.getElementById("selectedColor").innerText = selectedColor;
+
+        // Product Sizes
+        const sizeButtons = document.getElementById("sizeButtons");
+
+        sizeButtons.innerHTML = "";
+
+        product.sizes.forEach((size, index) => {
+          const button = document.createElement("button");
+
+          button.innerText = size;
+
+          if (index === 0) {
+            button.classList.add("active");
+            selectedSize = size;
+          }
+
+          button.onclick = function () {
+            selectSize(this, size);
+          };
+
+          sizeButtons.appendChild(button);
+        });
+
+        document.getElementById("selectedSize").innerText = selectedSize;
+      }
+
+      /* CHANGE PRODUCT IMAGE */
+
+      function changeImage(image) {
+        document.getElementById("mainProductImage").src = image.src;
+
+        document
+          .querySelectorAll(".thumbnail-list img")
+          .forEach((img) => img.classList.remove("active"));
+
+        image.classList.add("active");
+      }
+
+      /* SELECT SIZE */
+
+      function selectSize(button, size) {
+        selectedSize = size;
+
+        document.getElementById("selectedSize").innerText = size;
+
+        document
+          .querySelectorAll(".size-buttons button")
+          .forEach((btn) => btn.classList.remove("active"));
+
+        button.classList.add("active");
+      }
+
+      /* SELECT COLOR */
+
+      function selectColor(button, color) {
+        selectedColor = color;
+
+        document.getElementById("selectedColor").innerText = color;
+
+        document
+          .querySelectorAll(".color-option")
+          .forEach((btn) => btn.classList.remove("selected"));
+
+        button.classList.add("selected");
+      }
+
+      /* QUANTITY */
+
+      function increaseQuantity() {
+        if (quantity < 38) {
+          quantity++;
+        }
+
+        document.getElementById("quantity").innerText = quantity;
+      }
+
+      function decreaseQuantity() {
+        if (quantity > 1) {
+          quantity--;
+        }
+
+        document.getElementById("quantity").innerText = quantity;
+      }
+
+      const zoomContainer = document.getElementById("zoomContainer");
+      const mainProductImage = document.getElementById("mainProductImage");
+      const zoomResult = document.getElementById("zoomResult");
+
+      const zoom = 2.5;
+
+      zoomContainer.addEventListener("mouseenter", function () {
+        if (window.innerWidth > 900) {
+          zoomResult.style.display = "block";
+        }
+      });
+
+      zoomContainer.addEventListener("mousemove", function (e) {
+        if (window.innerWidth <= 900) return;
+
+        const rect = mainProductImage.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const width = rect.width;
+        const height = rect.height;
+
+        const bgWidth = width * zoom;
+        const bgHeight = height * zoom;
+
+        const percentX = (x / width) * 100;
+        const percentY = (y / height) * 100;
+
+        zoomResult.style.backgroundImage = `url("${mainProductImage.src}")`;
+
+        zoomResult.style.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
+        zoomResult.style.backgroundPosition = `${percentX}% ${percentY}%`;
+      });
+
+      zoomContainer.addEventListener("mouseleave", function () {
+        zoomResult.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
