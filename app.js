@@ -18,7 +18,7 @@ createApp({
       photo: 0,
 
       images: {
-        hero: "image/hero2.jpg",
+        hero: "image/hero.jpg",
         about: "image/about.jpg",
         logo: "image/logo.png",
       },
