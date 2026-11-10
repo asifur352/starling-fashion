@@ -596,15 +596,7 @@
                     <div class="small text-muted">{{ p.sub }}</div>
                     <div class="fw-semibold product-name">{{ p.name }}</div>
 
-                    <div class="product-price">
-                      <span v-if="p.old" class="old me-1"
-                        >৳{{ fmt(p.old) }}</span
-                      >
-                      <strong>৳{{ fmt(p.price) }}</strong>
-                      <span v-if="p.old" class="text-danger small">
-                        -{{ off(p) }}%
-                      </span>
-                    </div>
+
 
                     <div class="mt-2">
                       <span
