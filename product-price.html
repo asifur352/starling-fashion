@@ -665,12 +665,6 @@
             <small>(0 Rating)</small>
           </div>
 
-          <div class="price-section">
-            <h2 id="productPrice">৳608</h2>
-            <del id="productOldPrice">৳1215</del>
-            <span id="productSavings">Save ৳607</span>
-          </div>
-
           <p class="delivery">
             Discounted orders take 7-10 working days to deliver.
           </p>
@@ -940,23 +934,7 @@
         // Product Name
         document.getElementById("productName").innerText = product.name;
 
-        // Product Price
-        document.getElementById("productPrice").innerText =
-          "৳" + product.price.toLocaleString("en-US");
-
-        // Old Price
-        const oldPrice = document.getElementById("productOldPrice");
-        const savings = document.getElementById("productSavings");
-
-        if (product.old) {
-          oldPrice.innerText = "৳" + product.old.toLocaleString("en-US");
-
-          savings.innerText =
-            "Save ৳" + (product.old - product.price).toLocaleString("en-US");
-        } else {
-          oldPrice.style.display = "none";
-          savings.style.display = "none";
-        }
+     
 
         // Product Category
         document.getElementById("productCategory").innerText =
