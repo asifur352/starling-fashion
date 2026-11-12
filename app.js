@@ -662,5 +662,9 @@ createApp({
     setGalleryCategory(category) {
       this.activeGalleryCategory = category;
     },
+        showDetails(product) {
+  localStorage.setItem("selectedProduct", JSON.stringify(product));
+  window.location.href = "product-details.html";
+}
   },
 }).mount("#app");
