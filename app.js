@@ -451,7 +451,6 @@ createApp({
           gallery: [
             "image/hoodie/hoodie (2).jpg",
             "image/hoodie/hoodie (3).jpg",
-            "image/hoodie/hoodie (4).jpg",
             "image/hoodie/hoodie (5).jpg",
             "image/hoodie/hoodie (6).jpg",
             "image/hoodie/hoodie (7).jpg",
