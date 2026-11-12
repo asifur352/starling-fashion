@@ -178,7 +178,9 @@
           <!-- Product Image Grid -->
           <div class="row g-4">
             <div class="col-6 col-md-4 col-lg-3" v-for="product in filteredGallery" :key="product.name + product.img">
-              <article class="gallery-product-card h-100">
+              <article  class="gallery-product-card h-100"
+  @click="openProductPage(product)"
+  style="cursor: pointer;">
                 <div class="gallery-product-image">
                   <img :src="product.img" :alt="product.name" loading="lazy" />
 
